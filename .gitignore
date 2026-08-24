@@ -1,0 +1,80 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Virtual Environments
+venv/
+env/
+ENV/
+env.bak/
+venv.bak/
+.venv/
+
+# Environment Variables & Secrets (CRITICAL)
+.env
+.env.local
+.env.*.local
+*.env
+
+# Vector Stores & Embedded Databases (Mem0 / Qdrant / Chroma)
+/tmp/qdrant/
+*.qdrant/
+*.db
+*.sqlite3
+
+# LangSmith & Evaluation Cache / Artifacts
+.langsmith/
+eval_results/
+test_evals/
+
+# Presidio & spaCy model caches / downloads
+models/
+en_core_web_sm/
+*.tar.gz
+
+# Pytest, Coverage, and Linting
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.nox/
+.ruff_cache/
+
+# IDEs and Editors
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Logs & Temporary Files
+*.log
+logs/
+tmp/
+output/
+

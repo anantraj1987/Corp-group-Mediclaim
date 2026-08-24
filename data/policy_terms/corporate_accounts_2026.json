@@ -1,0 +1,178 @@
+[
+  {
+    "corporate_account": "TechCorp India Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "500000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 30,
+    "cd_balance_inr": "120000.00",
+    "cd_alert_threshold_inr": "25000.00"
+  },
+  {
+    "corporate_account": "Nimbus Cloudworks Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "500000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 15,
+    "cd_balance_inr": "150503.15",
+    "cd_alert_threshold_inr": "26604.95"
+  },
+  {
+    "corporate_account": "Zenith Auto Components Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "1000000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 45,
+    "cd_balance_inr": "174296.82",
+    "cd_alert_threshold_inr": "28426.46"
+  },
+  {
+    "corporate_account": "Bluewave Logistics India Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "1000000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 15,
+    "cd_balance_inr": "138219.00",
+    "cd_alert_threshold_inr": "13874.45"
+  },
+  {
+    "corporate_account": "Sundale Agro Exports Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "500000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 45,
+    "cd_balance_inr": "213352.27",
+    "cd_alert_threshold_inr": "35725.46"
+  },
+  {
+    "corporate_account": "Orbit Fintech Solutions Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "500000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 30,
+    "cd_balance_inr": "92044.93",
+    "cd_alert_threshold_inr": "12677.07"
+  },
+  {
+    "corporate_account": "Granite Infra Projects Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "1000000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 15,
+    "cd_balance_inr": "177543.49",
+    "cd_alert_threshold_inr": "37011.92"
+  },
+  {
+    "corporate_account": "Ferrous Steel Works Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "500000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 45,
+    "cd_balance_inr": "141489.56",
+    "cd_alert_threshold_inr": "32750.76"
+  },
+  {
+    "corporate_account": "Coral Reef Hospitality Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "300000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 30,
+    "cd_balance_inr": "219558.85",
+    "cd_alert_threshold_inr": "34103.35"
+  },
+  {
+    "corporate_account": "Pinnacle Pharma Labs Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "300000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 30,
+    "cd_balance_inr": "129754.67",
+    "cd_alert_threshold_inr": "24375.41"
+  },
+  {
+    "corporate_account": "Silverline Textiles Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "750000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 45,
+    "cd_balance_inr": "151271.75",
+    "cd_alert_threshold_inr": "32148.58"
+  },
+  {
+    "corporate_account": "Meridian Energy Systems Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "750000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 30,
+    "cd_balance_inr": "233350.93",
+    "cd_alert_threshold_inr": "32388.30"
+  },
+  {
+    "corporate_account": "Crestview Retail Ventures Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "1000000.00",
+    "family_definition": "1+5",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 15,
+    "cd_balance_inr": "153597.45",
+    "cd_alert_threshold_inr": "15944.40"
+  },
+  {
+    "corporate_account": "Northgate Consulting Group Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "300000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 45,
+    "cd_balance_inr": "242545.05",
+    "cd_alert_threshold_inr": "43290.04"
+  },
+  {
+    "corporate_account": "Vertex Semiconductors India Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "1000000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 15,
+    "cd_balance_inr": "135881.91",
+    "cd_alert_threshold_inr": "16490.88"
+  },
+  {
+    "corporate_account": "Harborline Shipping & Freight Pvt Ltd",
+    "policy_start_date": "2026-01-01",
+    "policy_end_date": "2026-12-31",
+    "sum_insured_inr": "750000.00",
+    "family_definition": "1+3",
+    "gst_rate_percent": "18",
+    "life_event_window_days": 45,
+    "cd_balance_inr": "184860.63",
+    "cd_alert_threshold_inr": "38299.15"
+  }
+]

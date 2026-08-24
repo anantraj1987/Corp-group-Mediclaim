@@ -1,0 +1,41 @@
+GMC MASTER SLA - Silverline Textiles Pvt Ltd
+Policy Tenure: 01-Jan-2026 to 31-Dec-2026 (365 Days)
+Sum Insured: INR 750,000 (1+3 Family Floater)
+
+Clause 4.2 - Family Definition
+The Corporate Group Mediclaim policy recognizes two family structures:
+1+3 (Employee + Spouse + up to 2 Children) or, where explicitly opted, 1+5
+(adding either the Employee's Parents OR Parents-in-law, not both concurrently).
+Dual enrollment of both biological parents and parents-in-law under the same
+employee is strictly prohibited. This account is enrolled under the
+1+3 structure, permitting a maximum of 3 dependents
+per employee record.
+
+Clause 5.1 - Maternity Sub-Limits
+Normal delivery is capped at INR 50,000 and cesarean delivery at INR 75,000
+per policy year. A 9-month waiting period applies unless a waiver has been
+granted at policy inception for continuity of coverage from the prior insurer.
+
+Clause 5.2 - Day-Care Procedure Approvals
+Listed day-care procedures are payable without the standard 24-hour
+hospitalization requirement, subject to network provider empanelment.
+
+Clause 6.4 - Life Event Window
+Mid-term additions arising from qualifying life events (newborn, marriage,
+legal adoption) must be intimated to the TPA within 45 days
+of the event date. Intimations received beyond this window are rejected and
+require the next policy renewal cycle for enrollment.
+
+Clause 7.1 - Corporate Cash Deposit (CD) Buffer & Replenishment
+The corporate CD account funds pro-rata premium debits for additions and
+receives pro-rata credits for deletions, inclusive of 18%
+GST on the base premium. The current CD balance is INR 151,271.75; a
+replenishment alert is raised whenever the closing CD balance falls below the
+minimum threshold of INR 32,148.58.
+
+Clause 8.1 - Enrolled Headcount & Batch Processing
+The policy covers the full Silverline Textiles Pvt Ltd employee base, with monthly HR census
+batches processed per cycle. Each batch row is independently validated against
+Clauses 4.2 and 6.4 before inclusion in the endorsement docket; non-conforming
+rows are logged as rejected exceptions rather than blocking the remainder of
+the batch.

@@ -1,0 +1,5 @@
+employee_id,company_name,work_email,dob,action_type,members,effective_date,cessation_date,event_date,intimation_date,base_premium
+EMP-9041,TechCorp India Pvt Ltd,rahul.mehta@techcorp.in,12-03-1990,NEW_HIRE_ADDITION,SELF|SPOUSE,2026-06-15,,,,6575.34
+EMP-4412,TechCorp India Pvt Ltd,ananya.roy@techcorp.in,05-11-1988,RESIGNATION_DELETION,SELF|SPOUSE,,2026-06-30,,,6049.31
+EMP-7120,TechCorp India Pvt Ltd,vikram.singh@techcorp.in,20-01-1985,LIFE_EVENT_ADDITION,CHILD,,,2026-01-01,2026-05-22,850.00
+EMP-3108,TechCorp India Pvt Ltd,priya.nair@techcorp.in,09-09-1982,DEPENDENT_MODIFICATION,PARENT|PARENT_IN_LAW,2026-07-01,,,,0.00
