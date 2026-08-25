@@ -12,7 +12,7 @@ from schemas.gmc_schemas import (
     RejectedException,
 )
 from services.endorsement_calculator import calculate_account_health, calculate_line_item
-from guardrails.output_validator import validate_endorsement_docket
+from guardrails.output_validator import run_guardrail_interceptors
 
 
 def assemble_docket(
@@ -57,7 +57,10 @@ def assemble_docket(
         cash_deposit_account_health=health,
         guardrails_validation_status="FAILED",
     )
+    docket.guardrails_interceptors = run_guardrail_interceptors(docket)
     docket.guardrails_validation_status = (
-        "PASSED" if not validate_endorsement_docket(docket) else "FAILED"
+        "PASSED"
+        if all(item.status == "PASSED" for item in docket.guardrails_interceptors)
+        else "FAILED"
     )
     return docket

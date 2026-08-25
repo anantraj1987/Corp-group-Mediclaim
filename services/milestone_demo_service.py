@@ -382,13 +382,6 @@ class MilestoneDemoService:
                 rejected_exceptions=rejected_exceptions,
             )
 
-        memory_status = self.record_memory(
-            corporate_account,
-            endorsement_effective_date,
-            len(approved_lines),
-            len(rejected_exceptions),
-        )
-
         output = docket.model_dump(mode="json")
         output["corporate_account"] = self.anonymize_corporate_account(corporate_account)
         output["policy_evidence"] = [
@@ -427,35 +420,41 @@ class MilestoneDemoService:
             policy.policy_start_date,
             source_digest,
         )
+        net_adjustment = docket.cash_deposit_account_health.net_premium_adjustment_inr
+        buffer_utilization = (
+            max(net_adjustment, Decimal("0"))
+            if isinstance(net_adjustment, Decimal)
+            else "TBD"
+        )
         record = {
             "corporate_account": corporate_account,
-            "policy_term_id": (
-                f"{corporate_account}|{policy.policy_start_date.isoformat()}|"
-                f"{policy.policy_end_date.isoformat()}"
-            ),
             "policy_start_date": policy.policy_start_date.isoformat(),
-            "endorsement_effective_date": endorsement_effective_date.isoformat(),
-            "source_file": census_path.name,
-            "approved_count": approved_count,
-            "exception_count": exception_count,
-            "policy_counters": {
-                "additions_processed": docket.endorsement_summary.additions_processed,
-                "deletions_processed": docket.endorsement_summary.deletions_processed,
-                "exceptions_flagged": docket.endorsement_summary.exceptions_flagged,
-                "monthly_census_changes": len(records),
-            },
-            "life_event_window_days": policy.life_event_window_days,
+            "policy_end_date": policy.policy_end_date.isoformat(),
             "opening_cd_balance_inr": str(docket.cash_deposit_account_health.opening_cd_balance_inr),
             "net_premium_adjustment_inr": str(docket.cash_deposit_account_health.net_premium_adjustment_inr),
             "closing_cd_balance_inr": str(docket.cash_deposit_account_health.closing_cd_balance_inr),
-            "cd_replenishment_alert": docket.cash_deposit_account_health.cd_replenishment_alert,
+            "premium_run_rate_inr": str(
+                sum(
+                    (
+                        item.total_premium_impact_inr
+                        for item in docket.processed_line_items
+                        if isinstance(item.total_premium_impact_inr, Decimal)
+                        and item.total_premium_impact_inr > 0
+                    ),
+                    Decimal("0"),
+                )
+            ),
+            "monthly_addition_count": docket.endorsement_summary.additions_processed,
+            "monthly_deletion_count": docket.endorsement_summary.deletions_processed,
+            "allocated_corporate_buffer_utilization_inr": str(
+                buffer_utilization
+            ),
         }
-        record["state_user_id"] = mem0_service.history._state_user_id(
-            record["corporate_account"], policy.policy_start_date
-        )
+        record["state_user_id"] = mem0_service.history._state_user_id(corporate_account, policy.policy_start_date)
+        policy_term_id = f"{corporate_account}|{policy.policy_start_date.isoformat()}|{policy.policy_end_date.isoformat()}"
         inserted = mem0_service.history.record_batch(batch_id, record)
         for item in records:
-            employee_token = item.employee_identifier
+            employee_token = self.anonymize_identifier(item.employee_identifier)
             exception = next(
                 (
                     value for value in rejected_exceptions
@@ -463,20 +462,29 @@ class MilestoneDemoService:
                 ),
                 None,
             )
+            outside_life_event_window = bool(
+                item.action_type == "LIFE_EVENT_ADDITION"
+                and item.event_date is not None
+                and item.intimation_date is not None
+                and (item.intimation_date - item.event_date).days
+                > policy.life_event_window_days
+            )
             mem0_service.history.record_enrollment(
                 employee_token,
                 policy.policy_start_date.isoformat(),
                 item.members,
                 {
                     "corporate_account": corporate_account,
-                    "policy_term_id": record["policy_term_id"],
-                    "batch_id": batch_id,
+                    "policy_term_id": policy_term_id,
                     "action_type": item.action_type,
+                    "dependent_tree": item.dependent_tree,
                     "event_date": item.event_date.isoformat() if item.event_date else None,
                     "intimation_date": item.intimation_date.isoformat() if item.intimation_date else None,
+                    "prior_claims": item.prior_claims,
                     "decision": "REJECTED" if exception else "APPROVED",
                     "rejection_reason": exception.rejection_reason if exception else None,
                     "sla_reference": exception.sla_reference if exception else None,
+                    "outside_life_event_window": outside_life_event_window,
                 },
             )
         return "RECORDED" if inserted else "DUPLICATE"
@@ -484,6 +492,7 @@ class MilestoneDemoService:
     def record_memory(
         self,
         corporate_account: str,
+        policy: PolicyTerms,
         endorsement_effective_date: date,
         approved_count: int,
         exception_count: int,
@@ -493,14 +502,15 @@ class MilestoneDemoService:
 
             if mem0_service.memory is None:
                 raise RuntimeError("Mem0 memory backend is unavailable")
-            memory_user_id = re.sub(
-                r"[^A-Za-z0-9_.:-]+",
-                "_",
-                f"corporate:{corporate_account}",
+            memory_user_id = mem0_service.history._state_user_id(
+                corporate_account,
+                policy.policy_start_date,
             )
             mem0_service.add_user_memory(
                 memory_user_id,
-                f"Processed census batch for {corporate_account} on {endorsement_effective_date.isoformat()}: "
+                f"Policy-term context for {corporate_account} "
+                f"({policy.policy_start_date.isoformat()} to {policy.policy_end_date.isoformat()}): "
+                f"endorsement processed on {endorsement_effective_date.isoformat()} with "
                 f"{approved_count} approved lines and {exception_count} exceptions.",
             )
             return "RECORDED"

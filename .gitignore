@@ -45,6 +45,7 @@ venv.bak/
 *.qdrant/
 *.db
 *.sqlite3
+/data/memory_history.json
 
 # LangSmith & Evaluation Cache / Artifacts
 .langsmith/

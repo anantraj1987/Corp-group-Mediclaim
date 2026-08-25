@@ -49,6 +49,8 @@ class CensusMember(BaseModel):
     coverage_cessation_date: Optional[date] = None
     event_date: Optional[date] = None
     intimation_date: Optional[date] = None
+    dependent_tree: List[Dict[str, Any]] = Field(default_factory=list)
+    prior_claims: List[Dict[str, Any]] = Field(default_factory=list)
     base_premium_inr: Money = Field(default=Decimal("0"), ge=0)
 
 
@@ -116,6 +118,12 @@ class EndorsementSummary(BaseModel):
     exceptions_flagged: int = Field(ge=0)
 
 
+class GuardrailInterceptor(BaseModel):
+    name: str
+    status: Literal["PASSED", "FAILED"]
+    messages: List[str] = Field(default_factory=list)
+
+
 class EndorsementDocket(BaseModel):
     model_config = ConfigDict(str_strip_whitespace=True)
 
@@ -126,4 +134,5 @@ class EndorsementDocket(BaseModel):
     processed_line_items: List[ProcessedLineItem]
     rejected_exceptions: List[RejectedException]
     cash_deposit_account_health: CashDepositAccountHealth
-    guardrails_validation_status: Literal["PASSED", "FAILED"]
+    guardrails_validation_status: Literal["PASSED", "FAILED"] = "FAILED"
+    guardrails_interceptors: List[GuardrailInterceptor] = Field(default_factory=list)

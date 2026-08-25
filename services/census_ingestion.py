@@ -1,5 +1,6 @@
 import csv
 import io
+import json
 from datetime import date, datetime
 from decimal import Decimal, InvalidOperation
 from pathlib import Path
@@ -79,12 +80,28 @@ def _parse_decimal(value: Any) -> Decimal:
         raise ValueError(f"invalid premium amount: {value}") from error
 
 
+def _parse_record_list(value: Any) -> list[dict[str, Any]]:
+    if value in (None, ""):
+        return []
+    if isinstance(value, list):
+        return [item for item in value if isinstance(item, dict)]
+    try:
+        parsed = json.loads(str(value))
+    except json.JSONDecodeError as error:
+        raise ValueError("expected a JSON list of objects") from error
+    if not isinstance(parsed, list) or not all(isinstance(item, dict) for item in parsed):
+        raise ValueError("expected a JSON list of objects")
+    return parsed
+
+
 def _normalize_row(row: dict[str, Any]) -> dict[str, Any]:
     normalized = {_normalize_header(key): value for key, value in row.items()}
     normalized["date_of_birth"] = _parse_date(normalized.get("date_of_birth"))
     for field in ("coverage_effective_date", "coverage_cessation_date", "event_date", "intimation_date"):
         normalized[field] = _parse_date(normalized.get(field))
     normalized["members"] = _parse_members(normalized.get("members"))
+    normalized["dependent_tree"] = _parse_record_list(normalized.get("dependent_tree"))
+    normalized["prior_claims"] = _parse_record_list(normalized.get("prior_claims"))
     normalized["base_premium_inr"] = _parse_decimal(normalized.get("base_premium_inr"))
     return normalized
 

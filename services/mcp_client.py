@@ -8,12 +8,18 @@ class RemoteMCPClient:
     """HTTP Client Bridge connecting LangGraph to remote MCP Microservices."""
 
     def __init__(self):
+        self.enabled = True
         self.services = {
             "gmc_actuarial": settings.MCP_GMC_ACTUARIAL_URL,
         }
 
+    def set_enabled(self, enabled: bool) -> None:
+        self.enabled = enabled
+
     def call_mcp_service(self, service_key: str, tool_name: str, arguments: dict = None) -> Dict[str, Any]:
         """Invocates a tool on a remote MCP HTTP microservice."""
+        if not self.enabled:
+            return {"status": "fallback", "message": "MCP service is disabled."}
         if arguments is None:
             arguments = {}
 

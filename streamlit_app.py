@@ -8,6 +8,7 @@ import tempfile
 from datetime import date
 from pathlib import Path
 
+import requests
 import streamlit as st
 
 from app import (
@@ -20,6 +21,7 @@ from app import (
     service,
 )
 from config.settings import settings
+from services.mcp_client import mcp_remote_client
 from services.rag_service import answer_policy_query
 
 
@@ -35,6 +37,8 @@ st.set_page_config(
 
 
 def start_mcp_server() -> None:
+    st.session_state["mcp_enabled"] = True
+    mcp_remote_client.set_enabled(True)
     process = st.session_state.get("mcp_process")
     if process and process.poll() is None:
         return
@@ -48,16 +52,31 @@ def start_mcp_server() -> None:
 
 
 def stop_mcp_server() -> None:
+    st.session_state["mcp_enabled"] = False
     process = st.session_state.get("mcp_process")
     if process and process.poll() is None:
         process.terminate()
         process.wait(timeout=5)
     st.session_state["mcp_process"] = None
+    mcp_remote_client.set_enabled(False)
 
 
 def mcp_is_running() -> bool:
+    if not st.session_state.get("mcp_enabled", False):
+        return False
     process = st.session_state.get("mcp_process")
-    return bool(process and process.poll() is None)
+    if process and process.poll() is None:
+        return True
+    try:
+        response = requests.get("http://127.0.0.1:8001/health", timeout=1)
+        return response.ok and response.json().get("service") == "gmc-actuarial-mcp"
+    except (requests.RequestException, ValueError):
+        return False
+
+
+if "mcp_enabled" not in st.session_state:
+    st.session_state["mcp_enabled"] = False
+mcp_remote_client.set_enabled(st.session_state["mcp_enabled"])
 
 
 def selected_census_path(uploaded_file, selected_file: str) -> Path:

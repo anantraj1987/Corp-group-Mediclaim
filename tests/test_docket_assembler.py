@@ -65,6 +65,13 @@ def test_docket_matches_sample_structure():
     }
     assert docket.cash_deposit_account_health.closing_cd_balance_inr == Decimal("119379.29")
     assert docket.guardrails_validation_status == "PASSED"
+    assert [item.name for item in docket.guardrails_interceptors] == [
+        "employee_identifier_anonymization",
+        "actuarial_calculation_available",
+        "cash_deposit_reconciliation",
+        "docket_summary_consistency",
+    ]
+    assert all(item.status == "PASSED" for item in docket.guardrails_interceptors)
 
 
 def test_tbd_actuarial_values_fail_output_guardrail():
@@ -109,4 +116,9 @@ def test_tbd_actuarial_values_fail_output_guardrail():
     )
 
     assert docket.guardrails_validation_status == "FAILED"
+    assert {
+        item.name
+        for item in docket.guardrails_interceptors
+        if item.status == "FAILED"
+    } == {"actuarial_calculation_available", "cash_deposit_reconciliation"}
     assert validate_endorsement_docket(docket)
