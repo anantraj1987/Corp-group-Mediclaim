@@ -88,7 +88,7 @@ jobs:
       OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
       LANGCHAIN_TRACING_V2: "true"
       LANGCHAIN_API_KEY: ${{ secrets.LANGCHAIN_API_KEY }}
-      LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT || 'Enterprise-Incident-Agent-CI' }}
+      LANGCHAIN_PROJECT: ${{ secrets.LANGCHAIN_PROJECT || 'Enterprise-Mediclaim-Agent-CI' }}
       JWT_SECRET_KEY: ${{ secrets.JWT_SECRET_KEY || 'default-ci-test-jwt-secret-key-32b' }}
       REDIS_HOST: localhost
       REDIS_PORT: 6379
@@ -137,4 +137,4 @@ jobs:
         with:
           context: .
           push: false
-          tags: enterprise-incident-agent:latest
+          tags: enterprise-mediclaim-agent:latest
