@@ -38,11 +38,6 @@ class EnterprisePresidioAnalyzer:
                 context=["aadhaar", "uid", "dependent"],
             ),
             PatternRecognizer(
-                supported_entity="CORPORATE_ACCOUNT",
-                patterns=[Pattern(name="corp_account_pattern", regex=r"\b[A-Z][A-Z0-9]{2,20}\s+(?:India|Pvt|Private|Ltd|Limited)\b", score=0.75)],
-                context=["corporate", "client", "account", "policy"],
-            ),
-            PatternRecognizer(
                 supported_entity="INDIAN_DOB",
                 patterns=[Pattern(name="indian_dob_pattern", regex=r"\b(?:0?[1-9]|[12]\d|3[01])[-/]\d{1,2}[-/]\d{4}\b", score=0.9)],
                 context=["dob", "birth", "born", "date"],
@@ -50,7 +45,7 @@ class EnterprisePresidioAnalyzer:
         ]
         for recognizer in recognizers:
             self.analyzer.registry.add_recognizer(recognizer)
-        logger.info("[PRESIDIO] Initialized analyzer with GMC employee, Aadhaar, corporate, and DOB recognizers.")
+        logger.info("[PRESIDIO] Initialized analyzer with GMC employee, Aadhaar, and DOB recognizers.")
 
     def analyze_text(self, text: str, score_threshold: float = 0.6) -> list:
         """Scans text for PII entities using NER and custom regex pattern recognizers."""
@@ -76,7 +71,7 @@ class EnterprisePresidioAnalyzer:
             entities=[
                 "PERSON", "EMAIL_ADDRESS", "PHONE_NUMBER",
                 "IP_ADDRESS", "CREDIT_CARD", "ENTERPRISE_EMP_ID",
-                "AADHAAR_NUMBER", "CORPORATE_ACCOUNT", "INDIAN_DOB"
+                "AADHAAR_NUMBER", "INDIAN_DOB"
             ],
             language="en",
             score_threshold=score_threshold
