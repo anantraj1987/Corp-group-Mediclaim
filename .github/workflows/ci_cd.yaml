@@ -114,6 +114,14 @@ jobs:
           pip install -r requirements.txt
           python -m spacy download en_core_web_sm
 
+      - name: Start GMC Actuarial MCP Microservice
+        run: |
+          nohup python -m mcp_services.gmc_actuarial_service > mcp_service.log 2>&1 &
+          for i in $(seq 1 15); do
+            curl -sf http://localhost:8001/health && break
+            sleep 1
+          done
+
       - name: Run LangSmith Evaluation Runner
         run: |
           python -m evals.run_evals
