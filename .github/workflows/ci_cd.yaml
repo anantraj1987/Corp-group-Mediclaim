@@ -74,7 +74,7 @@ jobs:
       - name: Execute Pytest Suite
         run: |
           pytest tests/ -v
-          continue-on-error: true
+          
 
   # -------------------------------------------------------------------
   # 3. LangSmith Evaluation Regression Gate
