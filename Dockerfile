@@ -18,4 +18,9 @@ COPY . .
 
 EXPOSE 8501
 
+# Health check to verify application readiness
+HEALTHCHECK --interval=30s --timeout=5s --start-period=10s --retries=3 \
+  CMD curl -f http://localhost:8501/docs || exit 1
+
+
 CMD ["streamlit", "run", "streamlit_app.py", "--server.address=0.0.0.0", "--server.port=8501"]
