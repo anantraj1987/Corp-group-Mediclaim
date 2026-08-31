@@ -34,7 +34,7 @@ jobs:
   # 2. Validation Unit, Security & Guardrail Testing
   # -------------------------------------------------------------------
   test:
-    name: Validation: Unit & Security Guardrail Tests
+    name: Validation-Unit & Security Guardrail Tests
     runs-on: ubuntu-latest
     needs: lint
     services:
