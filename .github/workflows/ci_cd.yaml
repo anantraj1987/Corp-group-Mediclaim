@@ -31,10 +31,10 @@ jobs:
 
 
   # -------------------------------------------------------------------
-  # 2. Unit, Security & Guardrail Testing
+  # 2. Validation Unit, Security & Guardrail Testing
   # -------------------------------------------------------------------
   test:
-    name: Unit & Security Guardrail Tests
+    name: Validation: Unit & Security Guardrail Tests
     runs-on: ubuntu-latest
     needs: lint
     services:
@@ -130,7 +130,7 @@ jobs:
   # 4. Container Build & Packaging
   # -------------------------------------------------------------------
   docker-build-and-push:
-    name: Build & Push Image to Docker Hub
+    name: Docker Build & Push Image to Docker Hub
     runs-on: ubuntu-latest
     needs: test
     if: github.event_name == 'push' && github.ref == 'refs/heads/main'
